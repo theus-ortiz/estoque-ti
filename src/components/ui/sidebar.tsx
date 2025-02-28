@@ -1,6 +1,6 @@
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { AlignJustify } from "lucide-react"
+import { AlignJustify, X } from "lucide-react"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -254,7 +254,8 @@ function SidebarTrigger({
   ...props
 }: React.ComponentProps<typeof Button>) {
   const { toggleSidebar } = useSidebar()
-
+  
+  const [enabled, setEnabled] = React.useState<boolean>(true)
   return (
     <Button
       data-sidebar="trigger"
@@ -264,11 +265,12 @@ function SidebarTrigger({
       className={cn("0", className)}
       onClick={(event) => {
         onClick?.(event)
-        toggleSidebar()
+        toggleSidebar();
+        setEnabled((prev) => !prev);
       }}
       {...props}
     >
-      <AlignJustify />
+      {enabled ? <X /> : <AlignJustify />}
       <span className="sr-only"></span>
     </Button>
   )
