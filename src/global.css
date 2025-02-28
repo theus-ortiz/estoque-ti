@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 main {
-  min-width: 70vw;
-  place-content: center;
-  padding: 2rem;
+  width: 100%;
+  place-content: flex;
+  /* padding: 1.2rem; */
 }
 
 :root {

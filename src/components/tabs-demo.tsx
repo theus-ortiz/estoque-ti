@@ -40,119 +40,124 @@ export function TabsDemo() {
   }
 
   return (
-    <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full max-w-4xl mx-auto">
-      <TabsList className="grid w-full grid-cols-4">
-        <TabsTrigger value="product">Product</TabsTrigger>
-        <TabsTrigger value="type">Type</TabsTrigger>
-        <TabsTrigger value="brands">Brands</TabsTrigger>
-        <TabsTrigger value="units">Units</TabsTrigger>
-      </TabsList>
-      <div className="mt-6">
-        <TabsContent value="product">
-          <Card>
-            <CardHeader>
-              <CardTitle>Product</CardTitle>
-              <CardDescription>Enter product details and save.</CardDescription>
-            </CardHeader>
-            <CardContent className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <Label htmlFor="type">Type</Label>
-                <Input id="type" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="brand">Brand</Label>
-                <Input id="brand" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="quantity">Quantity</Label>
-                <Input id="quantity" type="number" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="unit">Unit of Measurement</Label>
-                <Input id="unit" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="condition">Condition</Label>
-                <Input id="condition" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="location">Location</Label>
-                <Input id="location" />
-              </div>
-              <div className="space-y-1 col-span-2">
-                <Label htmlFor="observation">Observation</Label>
-                <Input id="observation" />
-              </div>
-              <div className="space-y-1 col-span-2">
-                <Label htmlFor="image">Image</Label>
-                <Input id="image" type="file" accept="image/*" />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button>Save Product</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="type">
-          <Card>
-            <CardHeader>
-              <CardTitle>Type</CardTitle>
-              <CardDescription>Enter type details and save.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="typeName">Name</Label>
-                <Input id="typeName" />
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="asset" />
-                <Label htmlFor="asset">Asset</Label>
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button>Save Type</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="brands">
-          <Card>
-            <CardHeader>
-              <CardTitle>Brands</CardTitle>
-              <CardDescription>Enter brand name and save.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="brandName">Name</Label>
-                <Input id="brandName" />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button>Save Brand</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="units">
-          <Card>
-            <CardHeader>
-              <CardTitle>Units</CardTitle>
-              <CardDescription>Enter unit details and save.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="unitName">Name</Label>
-                <Input id="unitName" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="acronym">Acronym</Label>
-                <Input id="acronym" />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button>Save Unit</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-      </div>
-    </Tabs>
+<Tabs value={activeTab} onValueChange={handleTabChange} className="w-full max-w-4xl mx-auto">
+  <TabsList className="grid w-full grid-cols-4">
+    <TabsTrigger value="product">Product</TabsTrigger>
+    <TabsTrigger value="type">Type</TabsTrigger>
+    <TabsTrigger value="brands">Brands</TabsTrigger>
+    <TabsTrigger value="units">Units</TabsTrigger>
+  </TabsList>
+  
+  {/* Wrapper que garante altura fixa e abas iguais */}
+  <div className="mt-6 min-h-[500px] flex">
+    <TabsContent value="product" className="w-full h-full flex">
+      <Card className="w-full flex flex-col flex-grow">
+        <CardHeader>
+          <CardTitle>Product</CardTitle>
+          <CardDescription>Enter product details and save.</CardDescription>
+        </CardHeader>
+        <CardContent className="grid grid-cols-2 gap-4 flex-grow">
+          <div className="space-y-1">
+            <Label htmlFor="type">Type</Label>
+            <Input id="type" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="brand">Brand</Label>
+            <Input id="brand" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="quantity">Quantity</Label>
+            <Input id="quantity" type="number" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="unit">Unit of Measurement</Label>
+            <Input id="unit" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="condition">Condition</Label>
+            <Input id="condition" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="location">Location</Label>
+            <Input id="location" />
+          </div>
+          <div className="space-y-1 col-span-2">
+            <Label htmlFor="observation">Observation</Label>
+            <Input id="observation" />
+          </div>
+          <div className="space-y-1 col-span-2">
+            <Label htmlFor="image">Image</Label>
+            <Input id="image" type="file" accept="image/*" />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button>Save Product</Button>
+        </CardFooter>
+      </Card>
+    </TabsContent>
+
+    <TabsContent value="type" className="w-full h-full flex">
+      <Card className="w-full flex flex-col flex-grow">
+        <CardHeader>
+          <CardTitle>Type</CardTitle>
+          <CardDescription>Enter type details and save.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-grow space-y-2">
+          <div className="space-y-1">
+            <Label htmlFor="typeName">Name</Label>
+            <Input id="typeName" />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox id="asset" />
+            <Label htmlFor="asset">Asset</Label>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button>Save Type</Button>
+        </CardFooter>
+      </Card>
+    </TabsContent>
+
+    <TabsContent value="brands" className="w-full h-full flex">
+      <Card className="w-full flex flex-col flex-grow">
+        <CardHeader>
+          <CardTitle>Brands</CardTitle>
+          <CardDescription>Enter brand name and save.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-grow space-y-2">
+          <div className="space-y-1">
+            <Label htmlFor="brandName">Name</Label>
+            <Input id="brandName" />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button>Save Brand</Button>
+        </CardFooter>
+      </Card>
+    </TabsContent>
+
+    <TabsContent value="units" className="w-full h-full flex">
+      <Card className="w-full flex flex-col flex-grow">
+        <CardHeader>
+          <CardTitle>Units</CardTitle>
+          <CardDescription>Enter unit details and save.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-grow space-y-2">
+          <div className="space-y-1">
+            <Label htmlFor="unitName">Name</Label>
+            <Input id="unitName" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="acronym">Acronym</Label>
+            <Input id="acronym" />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button>Save Unit</Button>
+        </CardFooter>
+      </Card>
+    </TabsContent>
+  </div>
+</Tabs>
   )
 }
