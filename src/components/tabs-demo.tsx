@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-export function TabsDemo() {
+export function TabsStock() {
   const navigate = useNavigate()
   const location = useLocation()
   const [activeTab, setActiveTab] = useState("product")
@@ -42,56 +42,55 @@ export function TabsDemo() {
   return (
 <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full max-w-4xl mx-auto">
   <TabsList className="grid w-full grid-cols-4">
-    <TabsTrigger value="product">Product</TabsTrigger>
-    <TabsTrigger value="type">Type</TabsTrigger>
-    <TabsTrigger value="brands">Brands</TabsTrigger>
-    <TabsTrigger value="units">Units</TabsTrigger>
+    <TabsTrigger value="product" className="cursor-pointer">Produto</TabsTrigger>
+    <TabsTrigger value="type" className="cursor-pointer">Tipo</TabsTrigger>
+    <TabsTrigger value="brands" className="cursor-pointer">Marca</TabsTrigger>
+    <TabsTrigger value="units" className="cursor-pointer">Unidades</TabsTrigger>
   </TabsList>
-  
-  {/* Wrapper que garante altura fixa e abas iguais */}
+
   <div className="mt-6 min-h-[500px] flex">
     <TabsContent value="product" className="w-full h-full flex">
       <Card className="w-full flex flex-col flex-grow">
         <CardHeader>
-          <CardTitle>Product</CardTitle>
-          <CardDescription>Enter product details and save.</CardDescription>
+          <CardTitle>Produto</CardTitle>
+          <CardDescription>Insira os detalhes do produto.</CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-2 gap-4 flex-grow">
           <div className="space-y-1">
-            <Label htmlFor="type">Type</Label>
+            <Label htmlFor="type">Tipo</Label>
             <Input id="type" />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="brand">Brand</Label>
+            <Label htmlFor="brand">Marca</Label>
             <Input id="brand" />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="quantity">Quantity</Label>
+            <Label htmlFor="quantity">Quantidade</Label>
             <Input id="quantity" type="number" />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="unit">Unit of Measurement</Label>
+            <Label htmlFor="unit">Unidade de medida</Label>
             <Input id="unit" />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="condition">Condition</Label>
+            <Label htmlFor="condition">Condição</Label>
             <Input id="condition" />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="location">Location</Label>
+            <Label htmlFor="location">Localização</Label>
             <Input id="location" />
           </div>
           <div className="space-y-1 col-span-2">
-            <Label htmlFor="observation">Observation</Label>
+            <Label htmlFor="observation">Observação</Label>
             <Input id="observation" />
           </div>
           <div className="space-y-1 col-span-2">
-            <Label htmlFor="image">Image</Label>
+            <Label htmlFor="image">Imagem</Label>
             <Input id="image" type="file" accept="image/*" />
           </div>
         </CardContent>
         <CardFooter>
-          <Button>Save Product</Button>
+          <Button className="cursor-pointer">Salvar</Button>
         </CardFooter>
       </Card>
     </TabsContent>
@@ -99,12 +98,12 @@ export function TabsDemo() {
     <TabsContent value="type" className="w-full h-full flex">
       <Card className="w-full flex flex-col flex-grow">
         <CardHeader>
-          <CardTitle>Type</CardTitle>
-          <CardDescription>Enter type details and save.</CardDescription>
+          <CardTitle>Tipo</CardTitle>
+          <CardDescription>Insira os detalhes do tipo.</CardDescription>
         </CardHeader>
         <CardContent className="flex-grow space-y-2">
           <div className="space-y-1">
-            <Label htmlFor="typeName">Name</Label>
+            <Label htmlFor="typeName">Nome</Label>
             <Input id="typeName" />
           </div>
           <div className="flex items-center space-x-2">
@@ -113,7 +112,7 @@ export function TabsDemo() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button>Save Type</Button>
+          <Button className="cursor-pointer">Salvar</Button>
         </CardFooter>
       </Card>
     </TabsContent>
@@ -121,17 +120,17 @@ export function TabsDemo() {
     <TabsContent value="brands" className="w-full h-full flex">
       <Card className="w-full flex flex-col flex-grow">
         <CardHeader>
-          <CardTitle>Brands</CardTitle>
-          <CardDescription>Enter brand name and save.</CardDescription>
+          <CardTitle>Marca</CardTitle>
+          <CardDescription>Insira do nome da marca.</CardDescription>
         </CardHeader>
         <CardContent className="flex-grow space-y-2">
           <div className="space-y-1">
-            <Label htmlFor="brandName">Name</Label>
+            <Label htmlFor="brandName">Nome</Label>
             <Input id="brandName" />
           </div>
         </CardContent>
         <CardFooter>
-          <Button>Save Brand</Button>
+        <Button className="cursor-pointer">Salvar</Button>
         </CardFooter>
       </Card>
     </TabsContent>
@@ -139,21 +138,21 @@ export function TabsDemo() {
     <TabsContent value="units" className="w-full h-full flex">
       <Card className="w-full flex flex-col flex-grow">
         <CardHeader>
-          <CardTitle>Units</CardTitle>
-          <CardDescription>Enter unit details and save.</CardDescription>
+          <CardTitle>Unidades</CardTitle>
+          <CardDescription>Insira os detalhes da unidade de medida.</CardDescription>
         </CardHeader>
         <CardContent className="flex-grow space-y-2">
           <div className="space-y-1">
-            <Label htmlFor="unitName">Name</Label>
+            <Label htmlFor="unitName">Nome</Label>
             <Input id="unitName" />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="acronym">Acronym</Label>
+            <Label htmlFor="acronym">Sigla da unidade</Label>
             <Input id="acronym" />
           </div>
         </CardContent>
         <CardFooter>
-          <Button>Save Unit</Button>
+          <Button className="cursor-pointer">Salvar</Button>
         </CardFooter>
       </Card>
     </TabsContent>
