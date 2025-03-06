@@ -40,7 +40,7 @@ const data = {
   navMain: [
     {
       title: "Estoque",
-      url: "#",
+      url: "/stock/product",
       icon: Package,
       items: [
         {
@@ -63,50 +63,50 @@ const data = {
     },
     {
       title: "Controle",
-      url: "#",
+      url: "/control/employees",
       icon: ListCheck,
       items: [
         {
           title: "Funcionários",
-          url: "/cotrol/employess",
+          url: "/control/employees",
         },
         {
           title: "Empréstimos",
-          url: "cotrol/borrowing",
+          url: "control/loans",
         },
       ],
     },
     {
       title: "Patrimônio",
-      url: "#",
+      url: "/property/branch",
       icon: FolderOpen,
       items: [
         {
           title: "Filiais",
-          url: "#",
+          url: "/property/branch",
         },
         {
           title: "Setores",
-          url: "#",
+          url: "/property/department",
         },
         {
           title: "Fornecedores",
-          url: "#",
+          url: "/property/suppliers",
         },
       ],
     },
     {
       title: "Usuários",
-      url: "#",
+      url: "/users/list",
       icon: Users,
       items: [
         {
-          title: "Criar Usuário",
-          url: "#",
+          title: "Listar Usuário",
+          url: "/users/listUser",
         },
         {
-          title: "Listar Usuários",
-          url: "#",
+          title: "Criar Usuários",
+          url: "/users/creatUser",
         },
       ],
     },
