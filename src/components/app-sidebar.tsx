@@ -18,7 +18,9 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { ModeToggle } from "./mode-toggle"
 import { ThemeProvider } from "./theme-provider"
 
@@ -115,20 +117,30 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-      </SidebarContent>
-      <SidebarFooter>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <ModeToggle></ModeToggle>
-        </ThemeProvider>
-        <NavUser user={data.user} />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Sidebar collapsible="icon" {...props}>
+        <SidebarHeader>
+          <TeamSwitcher teams={data.teams} />
+        </SidebarHeader>
+        <SidebarContent>
+          <NavMain items={data.navMain} />
+        </SidebarContent>
+        <SidebarFooter>
+          <ModeToggle />
+          <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <SidebarTrigger size="sm" />
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  <p>Expandir/Recolher Sidebar</p>
+                </TooltipContent>
+              </Tooltip>
+          </TooltipProvider>
+          <NavUser user={data.user} />
+        </SidebarFooter>
+        <SidebarRail />
+      </Sidebar>
+    </ThemeProvider>
   )
 }

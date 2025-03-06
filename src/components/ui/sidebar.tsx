@@ -1,6 +1,6 @@
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
-import { AlignJustify, X } from "lucide-react"
+import { ChevronRight, ChevronsLeft } from "lucide-react"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -260,7 +260,7 @@ function SidebarTrigger({
     <Button
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
-      variant="ghost"
+      variant="secondary"
       size="icon"
       className={cn("cursor-pointer", className)}
       onClick={(event) => {
@@ -270,8 +270,8 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      {enabled ? <X /> : <AlignJustify />}
-      <span className="sr-only"></span>
+      {enabled ? <ChevronsLeft /> : <ChevronRight />}
+      {/* <span className="sr-only"></span> */}
     </Button>
   )
 }

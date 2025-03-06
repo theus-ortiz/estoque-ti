@@ -8,6 +8,7 @@ main {
   width: 100%;
   place-content: flex;
   /* padding: 1.2rem; */
+  padding-top: 1rem;
 }
 
 :root {
