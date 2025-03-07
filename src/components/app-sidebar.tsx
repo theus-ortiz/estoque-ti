@@ -55,11 +55,11 @@ const data = {
         },
         {
           title: "Marcas",
-          url: "/stock/brand",
+          url: "/stock/brands",
         },
         {
           title: "Unidades",
-          url: "/stock/unit",
+          url: "/stock/units",
         },
       ],
     },
