@@ -11,6 +11,17 @@ main {
   padding-top: 1rem;
 }
 
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #413838;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background-color: oklch(0.141 0.005 285.823);
+}
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
