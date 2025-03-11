@@ -1,4 +1,4 @@
-import { TabsContainer } from "@/components/ui/TabsContainer"
+import { TabsContainer } from "@/components/TabsContainer"
 import { ProductTab } from "@/components/ui/Tabs/Stock/ProductTab"
 import { TypeTab } from "@/components/ui/Tabs/Stock/TypeTab"
 import { BrandTab } from "@/components/ui/Tabs/Stock/BrandTab"

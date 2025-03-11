@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import { ListProductsTab } from "@/components/ListProductsTab" // Ajuste o caminho conforme necessário
+import { ListProductsTab } from "@/components/ListProductsTab"
 
 export function ControlRoutes() {
   return (

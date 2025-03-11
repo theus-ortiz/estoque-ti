@@ -7,12 +7,16 @@ import (
 type Product struct {
     ID       int    `json:"Produtos_Id"`
     Type     string `json:"Tipo_Nome"`
-    Brand     string `json:"Marca_Nome"`
+    Brand    string `json:"Marca_Nome"`
     Local    string `json:"Local"`
     Quantity int    `json:"Qtd_Total"`
 }
 
-func GetAllProducts(db *sql.DB) ([]Product, error) {
+// GetAllProducts retorna uma lista de produtos paginada e o total de produtos
+func GetAllProducts(db *sql.DB, page, limit int) ([]Product, int, error) {
+    offset := (page - 1) * limit
+
+    // Query para obter os produtos paginados
     query := `
         SELECT
             produtos.id as Produtos_Id,
@@ -25,11 +29,12 @@ func GetAllProducts(db *sql.DB) ([]Product, error) {
         INNER JOIN marcas ON produtos.marca_id = marcas.id 
         INNER JOIN setores ON produtos.setor_id = setores.id 
         INNER JOIN filiais ON setores.filial_id = filiais.id 
-        INNER JOIN inventarios ON produtos.id = inventarios.produto_id;
+        INNER JOIN inventarios ON produtos.id = inventarios.produto_id
+        LIMIT ? OFFSET ?;
     `
-    rows, err := db.Query(query)
+    rows, err := db.Query(query, limit, offset)
     if err != nil {
-        return nil, err
+        return nil, 0, err
     }
     defer rows.Close()
 
@@ -37,10 +42,18 @@ func GetAllProducts(db *sql.DB) ([]Product, error) {
     for rows.Next() {
         var p Product
         if err := rows.Scan(&p.ID, &p.Type, &p.Brand, &p.Local, &p.Quantity); err != nil {
-            return nil, err
+            return nil, 0, err
         }
         products = append(products, p)
     }
 
-    return products, nil
+    // Query para obter o total de produtos
+    var total int
+    countQuery := `SELECT COUNT(*) FROM produtos`
+    err = db.QueryRow(countQuery).Scan(&total)
+    if err != nil {
+        return nil, 0, err
+    }
+
+    return products, total, nil
 }
