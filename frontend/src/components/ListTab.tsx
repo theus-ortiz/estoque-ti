@@ -1,13 +1,16 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { PaginationComponent } from "@/components/Pagination"
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 
 interface Column {
   key: string
   label: string
   defaultValue?: any
+  width?: string // Add width property for fixed column widths
 }
 
 interface Action {
@@ -58,7 +61,9 @@ export function ListTab({
             <TableHeader>
               <TableRow>
                 {columns.map((column) => (
-                  <TableHead key={column.key}>{column.label}</TableHead>
+                  <TableHead key={column.key} style={column.width ? { width: column.width } : undefined}>
+                    {column.label}
+                  </TableHead>
                 ))}
                 {actions.length > 0 && <TableHead>Ações</TableHead>}
               </TableRow>
@@ -67,8 +72,9 @@ export function ListTab({
               {data.map((item, index) => (
                 <TableRow key={index}>
                   {columns.map((column) => (
-                    <TableCell key={column.key}>
-                      {item[column.key] ?? column.defaultValue}</TableCell>
+                    <TableCell key={column.key} style={column.width ? { width: column.width } : undefined}>
+                      {item[column.key] ?? column.defaultValue}
+                    </TableCell>
                   ))}
                   {actions.length > 0 && (
                     <TableCell>
@@ -103,3 +109,4 @@ export function ListTab({
     </div>
   )
 }
+

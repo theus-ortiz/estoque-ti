@@ -8,7 +8,7 @@ import (
 	"github.com/theus-ortiz/estoque-ti-backend/models"
 )
 
-func ListBarnds(db *sql.DB) http.HandlerFunc {
+func ListBrands(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		types, err := models.GetAllBrand(db)
 		if err != nil {

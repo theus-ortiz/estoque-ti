@@ -1,32 +1,54 @@
 package main
 
 import (
-    "log"
-    "net/http"
-    "github.com/theus-ortiz/estoque-ti-backend/db"
-    "github.com/theus-ortiz/estoque-ti-backend/routes"
-    "github.com/rs/cors"
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+
+	"github.com/rs/cors"
+	"github.com/theus-ortiz/estoque-ti-backend/db"
+	"github.com/theus-ortiz/estoque-ti-backend/routes"
 )
 
 func main() {
-    // Inicializar o banco de dados
-    database := db.NewDB()
-    defer database.Close() // Fecha a conexão com o banco de dados ao finalizar o programa
+	// Inicializar o banco de dados
+	database := db.NewDB()
+	defer database.Close()
 
-    // Configurar as rotas
-    router := http.NewServeMux()
-    routes.SetupRoutes(router, database.GetConn())
+	// Obter a conexão com o banco de dados
+	dbConn := database.GetConn()
 
-    // Configurar o CORS
-    c := cors.New(cors.Options{
-        AllowedOrigins:   []string{"http://localhost:5173"}, // Permite solicitações do frontend
-        AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
-        AllowedHeaders:   []string{"Content-Type"},
-        AllowCredentials: true,
-    })
+	// Criar um novo roteador
+	mux := http.NewServeMux()
 
-    // Iniciar o servidor com CORS
-    handler := c.Handler(router)
-    log.Println("Servidor rodando na porta 8080...")
-    http.ListenAndServe(":8080", handler)
+	// Configurar as rotas
+	routes.SetupRoutes(mux, dbConn)
+
+	// Configurar CORS
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Content-Type", "Authorization"},
+		AllowCredentials: true,
+		Debug:            true, // Habilitar logs de debug para CORS
+	})
+
+	// Envolver o roteador com o middleware CORS
+	handler := c.Handler(mux)
+
+	// Adicionar middleware para logging de requisições
+	loggingHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("Requisição recebida: %s %s", r.Method, r.URL.Path)
+		handler.ServeHTTP(w, r)
+	})
+
+	// Iniciar o servidor
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Porta padrão
+	}
+	
+	fmt.Printf("Servidor iniciado na porta %s\n", port)
+	log.Fatal(http.ListenAndServe(":"+port, loggingHandler))
 }

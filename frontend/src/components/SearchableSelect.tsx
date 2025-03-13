@@ -1,4 +1,3 @@
-// components/SearchableSelect.tsx
 "use client"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -15,6 +14,7 @@ interface SearchableSelectProps {
   searchTerm: string
   onSearchTermChange: (term: string) => void
   onClear: () => void
+  disabled?: boolean
 }
 
 export function SearchableSelect({
@@ -26,12 +26,20 @@ export function SearchableSelect({
   searchTerm,
   onSearchTermChange,
   onClear,
+  disabled = false,
 }: SearchableSelectProps) {
   const [isOpen, setIsOpen] = useState(false)
   const clearButtonRef = useRef<HTMLButtonElement>(null)
 
+  // Garantir que options seja sempre um array e que cada item tenha as propriedades necessárias
+  const safeOptions = Array.isArray(options)
+    ? options.filter(
+        (option) => option && typeof option === "object" && option.ID !== undefined && option.Name !== undefined,
+      )
+    : []
+
   const handleOpenChange = (open: boolean) => {
-    if (document.activeElement === clearButtonRef.current) {
+    if (document.activeElement === clearButtonRef.current || disabled) {
       return
     }
     setIsOpen(open)
@@ -39,11 +47,17 @@ export function SearchableSelect({
 
   return (
     <div className="relative">
-      <Select value={value || ""} onValueChange={onValueChange} open={isOpen} onOpenChange={handleOpenChange}>
+      <Select
+        value={value || ""}
+        onValueChange={onValueChange}
+        open={isOpen}
+        onOpenChange={handleOpenChange}
+        disabled={disabled}
+      >
         <SelectTrigger className="w-full">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="max-h-[250px] overflow-y-auto">
           {/* Campo de busca dentro do Select */}
           <div className="p-2">
             <Input
@@ -53,14 +67,21 @@ export function SearchableSelect({
             />
           </div>
           {/* Lista de opções filtradas */}
-          {options.map((option) => (
-            <SelectItem key={option.ID} value={option.ID.toString()}>
-              {option.Name}
-            </SelectItem>
-          ))}
+          {safeOptions.length > 0 ? (
+            safeOptions.map((option) => (
+              <SelectItem
+                key={option.ID}
+                value={String(option.ID)} // Usar String() é mais seguro que toString()
+              >
+                {option.Name}
+              </SelectItem>
+            ))
+          ) : (
+            <div className="py-2 px-3 text-sm text-gray-500">Nenhuma opção encontrada</div>
+          )}
         </SelectContent>
       </Select>
-      {value && (
+      {value && !disabled && (
         <button
           type="button"
           ref={clearButtonRef}
@@ -74,3 +95,4 @@ export function SearchableSelect({
     </div>
   )
 }
+
